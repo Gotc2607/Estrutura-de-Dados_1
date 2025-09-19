@@ -7,16 +7,22 @@ int main() {
     scanf("%s", local);
     scanf("%s", aeroporto);
 
-    int found = 1; // assumimos que todos os caracteres vão ser encontrados
-    int pos = 0;   // posição atual em local
+    int found = 1;
+    int pos = 0;
 
-    for(int i = 0; aeroporto[i] != '\0'; i++) {
+    // calcula o tamanho de aeroporto
+    int len = 0;
+    while(aeroporto[len] != '\0') len++;
+
+    // se terminar em 'x', ignora o último caractere
+    if(len > 0 && aeroporto[len - 1] == 'x' || len > 0 && aeroporto[len - 1] == 'X') len--;
+
+    for(int i = 0; i < len; i++) {
         int match = 0;
         while(local[pos] != '\0') {
             char a = aeroporto[i];
             char l = local[pos];
 
-            // converte para minúscula manualmente
             if(a >= 'A' && a <= 'Z') a += 32;
             if(l >= 'A' && l <= 'Z') l += 32;
 
@@ -41,4 +47,3 @@ int main() {
 
     return 0;
 }
-
