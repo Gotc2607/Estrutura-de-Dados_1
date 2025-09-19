@@ -18,7 +18,7 @@ int main(){
     
     int y = 0;
     scanf("%d", &y);
-    int *ptr = (int*) malloc(y* sizeof(int)); //alocando espaço para y inteiros
+    int *ptr = (int*) malloc(y * sizeof(int)); //alocando espaço para y inteiros
 
 
     for(int i=1; i<y; i++){
