@@ -3,7 +3,7 @@
 
 int pares(char *str){
 
-    if(strlen(str) < 3){
+    if (str[0] == '\0' || str[1] == '\0' || str[2] == '\0') {
         return 0;
     }
     
