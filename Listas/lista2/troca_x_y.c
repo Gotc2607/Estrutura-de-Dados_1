@@ -2,9 +2,9 @@
 #include <string.h>
 
 void troca(char *str){
-    if(*str == '\0')
+    if(*str == '\0'){
         return;
-    
+    }
     if(*str == 'x'){
         *str = 'y';
     }
@@ -15,8 +15,8 @@ void troca(char *str){
 
 int main(){
 
-    char str[80];
-    scanf("%79s", str);
+    char str[81];
+    scanf("%s", str);
 
     troca(str);
     printf("%s\n", str);
