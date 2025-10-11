@@ -1,30 +1,19 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-int pares(char *str){
-
-    if (str[0] == '\0' || str[1] == '\0' || str[2] == '\0') {
+int pares(char *s){
+    int formouPares = 0;
+    if(strlen(s) < 3){
         return 0;
+    }else if(*s == *(s+2)){
+        formouPares = 1 ;
     }
-    
-    if(str[0] == str[2]){
-        return 1 + pares(str+1);
-    }
-    else{
-        return pares(str+1);
-    }
-
+    return formouPares + pares(s+1);
 }
-
 int main(){
-
-    char str[81];
-
-    scanf("%s", str);
-
-    int resultado = pares(str);
-    printf("%d\n", resultado);
-
-
+    char s[201];
+    scanf("%s", s);
+    printf("%d\n", pares(s));
     return 0;
 }
