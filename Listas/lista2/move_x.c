@@ -1,39 +1,33 @@
 #include <stdio.h>
-#include <string.h>
 
-void move_x(char *s, char *resultado) {
-    // Caso base: string vazia
+// Função recursiva que move todos os 'x' para o final
+void move_x(char *s, char *saida, int *pos_normal, int *pos_x) {
     if (*s == '\0') {
-        *resultado = '\0';
+        saida[*pos_normal + *pos_x] = '\0';
         return;
     }
 
-    // Processa o primeiro caractere
-    char primeiro = *s;
-
-    // Chama recursivamente para o restante da string
-    move_x(s + 1, resultado);
-
-    // Se o caractere for 'x', adiciona no final
-    if (primeiro == 'x') {
-        int len = strlen(resultado);
-        resultado[len] = 'x';
-        resultado[len + 1] = '\0';
+    if (*s == 'x') {
+        // Guarda o 'x' mais ao fim da string de saída
+        saida[*pos_normal + *pos_x] = 'x';
+        (*pos_x)++;
+    } else {
+        // Guarda os outros caracteres na frente
+        saida[*pos_normal] = *s;
+        (*pos_normal)++;
     }
-    // Caso contrário, adiciona no início
-    else {
-        int len = strlen(resultado);
-        // Desloca tudo uma posição à frente
-        memmove(resultado + 1, resultado, len + 1);
-        resultado[0] = primeiro;
-    }
+
+    move_x(s + 1, saida, pos_normal, pos_x);
 }
 
 int main() {
-    char entrada[101], saida[101] = "";
+    char entrada[101], saida[101];
+    int pos_normal = 0, pos_x = 0;
+
     scanf("%100s", entrada);
 
-    move_x(entrada, saida);
+    move_x(entrada, saida, &pos_normal, &pos_x);
+
     printf("%s\n", saida);
 
     return 0;
