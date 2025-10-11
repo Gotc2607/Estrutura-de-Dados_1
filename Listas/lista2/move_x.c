@@ -1,34 +1,37 @@
 #include <stdio.h>
 
-// Função recursiva que move todos os 'x' para o final
-void move_x(char *s, char *saida, int *pos_normal, int *pos_x) {
+int rlen(const char *s) {
+    if (*s == '\0') return 0;
+    return 1 + rlen(s + 1);
+}
+
+void move_x_rec(const char *s, char *out, int *front, int *back) {
     if (*s == '\0') {
-        saida[*pos_normal + *pos_x] = '\0';
+        out[*front] = '\0'; // front == number of non-'x' colocados; também é posição para '\0'
         return;
     }
 
     if (*s == 'x') {
-        // Guarda o 'x' mais ao fim da string de saída
-        saida[*pos_normal + *pos_x] = 'x';
-        (*pos_x)++;
+        out[*back] = 'x';
+        (*back)--;
     } else {
-        // Guarda os outros caracteres na frente
-        saida[*pos_normal] = *s;
-        (*pos_normal)++;
+        out[*front] = *s;
+        (*front)++;
     }
 
-    move_x(s + 1, saida, pos_normal, pos_x);
+    move_x_rec(s + 1, out, front, back);
 }
 
 int main() {
     char entrada[101], saida[101];
-    int pos_normal = 0, pos_x = 0;
+    if (scanf("%100s", entrada) != 1) return 0;
 
-    scanf("%100s", entrada);
+    int len = rlen(entrada);
+    int front = 0;
+    int back = len - 1;
 
-    move_x(entrada, saida, &pos_normal, &pos_x);
+    move_x_rec(entrada, saida, &front, &back);
 
     printf("%s\n", saida);
-
     return 0;
 }
