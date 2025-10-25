@@ -1,4 +1,4 @@
-// Merge Sort Implementation in C
+
 #include <stdio.h>
 #include <stdlib.h>
 
