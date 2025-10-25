@@ -2,6 +2,7 @@
 
 // Ela busca um termo em um array usando como base o termo no meio do array
 // O array precisa estar ordenado 
+// returna o indice onde o elemento está não o valor do elemento
 
 #include <stdio.h>
 
@@ -12,7 +13,7 @@ int Busca_binaria(int *v, int n, int x){
 
         int meio = (inicio + fim) / 2; //calculando o meio do array
 
-        if(v[meio] == x){
+        if(v[meio] == x){ //caso o x esteja no meio retornamos o indice do meio
             return meio;
         }
 
