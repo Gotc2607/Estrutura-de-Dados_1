@@ -33,7 +33,7 @@ int main(){
     int v[] = {7 ,1 , 4, 3, 2, 8};
     int n = sizeof(v)/sizeof(v[0]); // calcula  o tamanho do vetor usando sizeof
 
-    Selection_Sort(v, n, 0); // a primeira chamada deve ser com o inicio igual a 0
+    Selection_Sort(v, n, 0); // a primeira chamada deve ser com o inicio igual a 0.
 
     for(int i =0; i < n; i++){
         printf("%d ", v[i]);

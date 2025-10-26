@@ -12,5 +12,7 @@ int main() {
     printf("%p\n", (void*)ptr);  // Imprime o valor do ponteiro (endereço de x)
     printf("%p\n", (void*)&ptr); // Imprime o endereço do ponteiro ptr
 
+    // & significa endereço de memória
+
     return 0;
 }
