@@ -20,9 +20,8 @@ void Selection_Sort(int *v, int n, int inicio){
         }
     }
 
-    if(menor != inicio){
-        troca(&v[inicio], &v[menor]); // trocando o menor elemento com o primeiro
-    }
+    
+    troca(&v[inicio], &v[menor]); // trocando o menor elemento com o primeiro
 
     Selection_Sort(v, n, inicio + 1); //chamamos ela novamente para ela ordenar a outra parte do vetor
 
@@ -30,7 +29,7 @@ void Selection_Sort(int *v, int n, int inicio){
 
 int main(){
 
-    int v[] = {7 ,1 , 4, 3, 2, 8};
+    int v[] = {1, 7, 4, 3, 2, 8};
     int n = sizeof(v)/sizeof(v[0]); // calcula  o tamanho do vetor usando sizeof
 
     Selection_Sort(v, n, 0); // a primeira chamada deve ser com o inicio igual a 0.
