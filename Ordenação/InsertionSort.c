@@ -20,7 +20,7 @@ void Insertion_Sort(int *v, int n){
 
 int main(){
 
-    int v[] = {7 ,1 , 4, 3, 2, 8};
+    int v[] = {4, 1, 7, 2};
     int n = sizeof(v)/sizeof(v[0]); // calcula  o tamanho do vetor usando sizeof
 
     Insertion_Sort(v, n);
