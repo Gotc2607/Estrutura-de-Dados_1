@@ -3,24 +3,24 @@
 
 int main() {
     int n;
-    char palavra[1000]; // Tamanho suficiente para acomodar a entrada
+    char palavra[1000]; 
     
-    // Lê o tamanho da palavra
+    
     scanf("%d", &n);
     
-    // Lê a palavra (ignorando possíveis espaços ou quebras de linha)
-    getchar(); // Consome o '\n' após o número
-    fgets(palavra, n + 2, stdin); // +2 para o '\n' e '\0'
     
-    // Remove o caractere de nova linha se existir
+    getchar(); 
+    fgets(palavra, n + 2, stdin); 
+    
+   
     int len = strlen(palavra);
     if (len > 0 && palavra[len - 1] == '\n') {
         palavra[len - 1] = '\0';
     }
     
-    int ehPalindromo = 1; // Assume que é palíndromo inicialmente
+    int ehPalindromo = 1; 
     
-    // Verifica se é palíndromo comparando caracteres simétricos
+    
     for (int i = 0; i < n / 2; i++) {
         if (palavra[i] != palavra[n - 1 - i]) {
             ehPalindromo = 0;
@@ -28,7 +28,7 @@ int main() {
         }
     }
     
-    // Imprime o resultado
+  
     printf("%d\n", ehPalindromo);
     
     return 0;

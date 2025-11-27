@@ -6,16 +6,16 @@ typedef struct fila {
 } fila;
 
 int desenfileira(fila *f, int *y) {
-    // Verifica se a fila está vazia
+    
     if (f->p == f->u) {
-        return 0; // Fila vazia, remoção mal sucedida
+        return 0; 
     }
     
-    // Remove o elemento do início da fila e salva em y
+    
     *y = f->dados[f->p];
     
-    // Atualiza o ponteiro p (início) considerando fila circular
+ 
     f->p = (f->p + 1) % f->N;
     
-    return 1; // Remoção bem sucedida
+    return 1; 
 }

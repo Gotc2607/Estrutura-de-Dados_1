@@ -3,98 +3,98 @@
 #include <string.h>
 #include <ctype.h>
 
-#define MAX_CIDADE 27
 
-typedef struct celula {
-    char cidade[MAX_CIDADE];
-    struct celula *prox;
-} celula;
+typedef struct Node {
+    char nome[30];
+    struct Node *proximo;
+} Node;
 
-typedef struct {
-    celula *inicio;
-    celula *fim;
-} Fila;
 
-void inicializar_fila(Fila *f) {
-    f->inicio = f->fim = NULL;
-}
+Node *inicio = NULL;
+Node *fim = NULL;
 
-void enfileirar(Fila *f, char cidade[]) {
-    celula *novo = malloc(sizeof(celula));
-    strcpy(novo->cidade, cidade);
-    novo->prox = NULL;
-    
-    if (f->fim == NULL) {
-        f->inicio = f->fim = novo;
+
+void enfileirar(char *cidade) {
+    Node *novo = (Node*) malloc(sizeof(Node));
+    strcpy(novo->nome, cidade);
+    novo->proximo = NULL;
+
+    if (inicio == NULL) {
+        inicio = novo;
+        fim = novo;
     } else {
-        f->fim->prox = novo;
-        f->fim = novo;
+        fim->proximo = novo;
+        fim = novo;
     }
 }
 
-int fila_vazia(Fila *f) {
-    return f->inicio == NULL;
-}
 
-void desenfileirar(Fila *f, char cidade[]) {
-    if (fila_vazia(f)) return;
-    
-    celula *temp = f->inicio;
-    strcpy(cidade, temp->cidade);
-    f->inicio = f->inicio->prox;
-    
-    if (f->inicio == NULL) {
-        f->fim = NULL;
+Node* desenfileirar() {
+    if (inicio == NULL) return NULL;
+
+    Node *temp = inicio;
+    inicio = inicio->proximo;
+
+    if (inicio == NULL) {
+        fim = NULL;
     }
+    return temp;
+}
+
+
+void mover_primeiro_para_final() {
+    if (inicio == NULL || inicio == fim) return; 
+
     
-    free(temp);
-}
-
-char ultima_letra(char cidade[]) {
-    int len = strlen(cidade);
-    return tolower(cidade[len - 1]);
-}
-
-char primeira_letra(char cidade[]) {
-    return tolower(cidade[0]);
+    fim->proximo = inicio;
+    fim = inicio;
+    
+    
+    inicio = inicio->proximo;
+    
+    
+    fim->proximo = NULL;
 }
 
 int main() {
-    Fila fila;
-    inicializar_fila(&fila);
-    char cidade[MAX_CIDADE];
+    char buffer[30];
+
     
-    // Lê todas as cidades e enfileira
-    while (scanf("%s", cidade) != EOF) {
-        enfileirar(&fila, cidade);
+    while (scanf("%s", buffer) != EOF) {
+        enfileirar(buffer);
     }
+
     
-    if (fila_vazia(&fila)) {
-        return 0;
-    }
+    if (inicio == NULL) return 0;
+
+
+    Node *atual = desenfileirar();
+    printf("%s\n", atual->nome);
+
     
-    // Processa o primeiro show (sempre na primeira cidade)
-    char cidade_atual[MAX_CIDADE];
-    desenfileirar(&fila, cidade_atual);
-    printf("%s\n", cidade_atual);
+    int tamanho = strlen(atual->nome);
+    char ultima_letra = atual->nome[tamanho - 1];
     
-    char ultima_letra_show = ultima_letra(cidade_atual);
+    free(atual); 
+
     
-    // Processa o restante dos shows
-    while (!fila_vazia(&fila)) {
-        char proxima_cidade[MAX_CIDADE];
-        desenfileirar(&fila, proxima_cidade);
+    while (inicio != NULL) {
         
-        // Se a próxima cidade começa com a mesma letra que terminou o último show
-        if (primeira_letra(proxima_cidade) == ultima_letra_show) {
-            // Vai para o final da fila
-            enfileirar(&fila, proxima_cidade);
-        } else {
-            // Faz o show nesta cidade
-            printf("%s\n", proxima_cidade);
-            ultima_letra_show = ultima_letra(proxima_cidade);
+        char primeira_letra_prox = tolower(inicio->nome[0]);
+
+        if (primeira_letra_prox == ultima_letra) {
+            mover_primeiro_para_final();
         }
+
+        
+        atual = desenfileirar();
+        printf("%s\n", atual->nome);
+
+        tamanho = strlen(atual->nome);
+        ultima_letra = atual->nome[tamanho - 1];
+
+        free(atual);
     }
-    
+
     return 0;
 }

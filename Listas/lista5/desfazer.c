@@ -20,7 +20,7 @@ int estaVazia(Pilha *p) {
 
 int empilhar(Pilha *p, char *str) {
     if (p->topo == MAX_STACK - 1) {
-        return 0; // Pilha cheia
+        return 0; 
     }
     strcpy(p->dados[++(p->topo)], str);
     return 1;
@@ -28,7 +28,7 @@ int empilhar(Pilha *p, char *str) {
 
 int desempilhar(Pilha *p, char *str) {
     if (estaVazia(p)) {
-        return 0; // Pilha vazia
+        return 0; 
     }
     strcpy(str, p->dados[(p->topo)--]);
     return 1;
@@ -43,11 +43,11 @@ int main() {
     
     while (scanf("%s", comando) != EOF) {
         if (strcmp(comando, "inserir") == 0) {
-            // Lê a string até o final da linha
-            getchar(); // Consome o espaço após "inserir"
+            
+            getchar(); 
             fgets(str, sizeof(str), stdin);
             
-            // Remove o caractere de nova linha se existir
+           
             int len = strlen(str);
             if (len > 0 && str[len - 1] == '\n') {
                 str[len - 1] = '\0';
